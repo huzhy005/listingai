@@ -8,7 +8,7 @@ type Result = {
   description: string
   bullets: string[]
 }
-
+ 
 export default function Home() {
   const [user, setUser] = useState<any>(null)
   const [usageCount, setUsageCount] = useState(0)
