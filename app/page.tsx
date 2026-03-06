@@ -72,6 +72,16 @@ export default function Home() {
     router.push('/login')
   }
 
+  async function handleUpgrade() {
+    const res = await fetch('/api/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ userId: user.id, email: user.email }),
+    })
+    const { url } = await res.json()
+    window.location.href = url
+  }
+
   function copyAll() {
     if (!result) return
     const text = `${result.title}\n\n${result.description}\n\n${result.bullets.map(b => `• ${b}`).join('\n')}`
@@ -92,6 +102,9 @@ export default function Home() {
           </div>
           <div className="text-right">
             <p className="text-xs text-gray-400 mb-1">{usageCount}/10 free uses</p>
+            <button onClick={handleUpgrade} className="text-xs bg-orange-500 text-white px-3 py-1 rounded-full hover:bg-orange-600 transition-all mb-1 block">
+              Upgrade to Pro $12/mo
+            </button>
             <button onClick={signOut} className="text-sm text-gray-400 hover:text-gray-600">Sign out</button>
           </div>
         </div>
